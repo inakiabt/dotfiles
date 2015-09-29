@@ -1,0 +1,3 @@
+aws logs filter --log-group-name 'API-Gateway-Execution-Logs_5kz46x398j/v1' --log-stream-names 'Default-Log-Stream' --start-time 2015-09-29T00:00:00Z --end-time 2015-09-30T00:00:00Z --filter-pattern akoMSlvcIo
+NODE_ENV="prod" /opt/boxen/nodenv/shims/node index.js --debug --profile ops -c -r 2015-07-10__16_09_21
+ti build --ios --dev
