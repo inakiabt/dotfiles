@@ -1,0 +1,2 @@
+# colors inherited from .bash_prompt
+export GIT_RADAR_COLOR_BRANCH="${bold}${purple}"

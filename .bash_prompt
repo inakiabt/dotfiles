@@ -21,25 +21,6 @@ function find-up() {
   fi
 }
 
-function parse_alloy_version() {
-    local version=$(alloy --version 2> /dev/null)
-    if [ ! -z "$version" ]; then
-        echo -n "‡"
-        echo -en "\\033[0;36m$version\\033[0;0m"
-    fi
-}
-
-function parse_titanium_version() {
-    local tiapp=`find-up tiapp.xml`
-    if [ -z "$tiapp" ]; then return; fi
-    local tiversion=$(cat $tiapp/tiapp.xml 2> /dev/null | sed -n 's/<sdk-version>\(.*\)<\/sdk-version>/\1/p' | tr -d ' \t\n\r\f')
-    local appversion=$(cat $tiapp/tiapp.xml 2> /dev/null | sed -n 's/<version>\(.*\)<\/version>/\1/p' | tr -d ' \t\n\r\f')
-    if [ -z "$tiversion" ]; then return; fi
-    echo -en " \\033[2;36mTi $tiversion\\033[0;0m App ${appversion}"
-    #parse_alloy_version
-    #echo -n ")"
-}
-
 function parse_git_dirty() {
     [[ $(git status 2> /dev/null | tail -n1) != *"working directory clean"* ]] && echo "*"
 }
@@ -152,8 +133,7 @@ PS1+="\[${white}\] at ";
 PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${white}\] in ";
 PS1+="\[${green}\]\w"; # working directory
-PS1+="\[$white\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$purple\]\$(parse_git_branch)\[$white\]"; # Git repository details
-#PS1+="\$(parse_titanium_version)";
+PS1+="\$(git-radar --bash --fetch)"
 PS1+="\n";
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;
