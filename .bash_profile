@@ -46,6 +46,9 @@ if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completio
 	complete -o default -o nospace -F _git g;
 fi;
 
+# Enable tab completion for `aws`
+complete -C aws_completer aws
+
 # Enable tab completion for `nodenv`
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 
