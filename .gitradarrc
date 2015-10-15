@@ -31,4 +31,5 @@ else
     magenta="\033[1;31m";
 fi;
 
+export GIT_RADAR_FORMAT=" ${bold}${white}on${reset} %{branch}%{ :changes}%{ :local}%{ :remote}"
 export GIT_RADAR_COLOR_BRANCH="${bold}${purple}"
