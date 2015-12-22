@@ -14,6 +14,14 @@ function doIt() {
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	doIt;
 else
+	echo;
+	echo "DRY RUN:"
+
+	rsync --dry-run --exclude ".git/" --exclude ".gitmodules" --exclude ".DS_Store" --exclude "bootstrap.sh" \
+		--exclude "README.md" --exclude ".ssh/" --exclude "LICENSE-MIT.txt" -av --no-perms . ~
+	rsync --dry-run -av --no-perms ./.ssh/* ~/.ssh
+
+	echo;
 	read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
 	echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
