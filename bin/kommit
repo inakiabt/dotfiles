@@ -1,0 +1,196 @@
+#!/usr/bin/env bash
+
+set -e
+
+usage() {
+cat <<EOF
+usage: kommit [-m <msg> | -t <msg> | -c | -e | -s | -i | -r | -h]
+
+    -m <msg>        append message
+    -t <msg>        append message with timestamp
+    -c              check if hook installed ?
+    -e              edit messages
+    -s              show current message(s)
+    -i              install kommit hook to .git/hooks/prepare-commit-msg
+    -r              remove kommit hook, delete .git/hooks/prepare-commit-msg
+    -h              print this message
+
+EOF
+}
+
+current_git_directory=$(git rev-parse --git-dir 2>/dev/null)
+kommit_message_file="${current_git_directory}/kommit-message"
+
+in_git_repo() {
+    if [[ ! -z $current_git_directory && $current_git_directory != "~" && $current_git_directory != "." && $current_git_directory != $HOME/.git ]]; then
+        return 0
+    fi
+    return 1
+}
+
+add_message() {
+    # it is possible to forget installing hook!
+    if [[ ! -e $current_git_directory/hooks/prepare-commit-msg ]]; then
+        create_hook_file
+    fi
+    bullet="-"
+    if [[ $KOMMIT_BULLET ]]; then
+        bullet=$KOMMIT_BULLET
+    fi
+    echo "${bullet} ${1}" >> "${kommit_message_file}"
+}
+
+edit_messages() {
+    $EDITOR "${kommit_message_file}"
+}
+
+install_hook() {
+    if [[ -e $current_git_directory/hooks/prepare-commit-msg ]]; then
+        read -p "Hook is already installed. Would you like to re-install ? (y/N)" users_option
+        case $users_option in
+            [yY])
+                echo "Ok, over-writing hook..."
+                ;;
+            [nN])
+                echo "Canceled..."
+                return 1
+                ;;
+            *)
+                echo "Ok, over-writing hook..."
+                ;;
+        esac
+    fi
+    create_hook_file &&
+    echo "Hook installed succesfully..."
+    return 0
+}
+
+remove_hook() {
+    if [[ -e $current_git_directory/hooks/prepare-commit-msg ]]; then
+        rm -f $current_git_directory/hooks/prepare-commit-msg &&
+        echo "Hook removed succesfully..."
+    else
+        echo "Hook is not installed ?"
+    fi
+}
+
+is_hook_installed() {
+    if [[ -e $current_git_directory/hooks/prepare-commit-msg ]]; then
+        echo "Yes, hook installed..."
+    else
+        echo "Nope, hook is not installed... \`kommit -i\` is your friend..."
+    fi
+}
+
+create_hook_file() {
+(
+cat <<'EOF'
+#!/usr/bin/env bash
+
+current_git_directory=$(git rev-parse --git-dir 2>/dev/null)
+msg="${current_git_directory}/kommit-message"
+
+if [[ -f $msg ]]; then
+    wrap_at=70
+    if [[ $KOMMIT_WRAP_AT && $KOMMIT_WRAP_AT =~ ^-?[0-9]+$ ]]; then
+        wrap_at=$KOMMIT_WRAP_AT
+    fi
+    out=$(fold -w $wrap_at -s "${msg}" | sed "s/^/    /")
+    echo -e "\n\n$out\n\n" | cat - "${1}" > tmp_msg &&
+        mv tmp_msg "${1}" &&
+        rm -f "${msg}"
+fi
+EOF
+) > $current_git_directory/hooks/prepare-commit-msg &&
+chmod +x $current_git_directory/hooks/prepare-commit-msg
+}
+
+show_current_messages() {
+    if [[ -e $kommit_message_file ]]; then
+        wrap_at=72
+        if [[ $KOMMIT_WRAP_AT && $KOMMIT_WRAP_AT =~ ^-?[0-9]+$ ]]; then
+            wrap_at=$KOMMIT_WRAP_AT
+        fi
+        out=$(fold -w $wrap_at -s "${kommit_message_file}" | sed "s/^/    /")
+        echo -e "${out}"
+    else
+        echo "You have no messages..."
+    fi
+}
+
+bash_completion(){
+    bin_name=$(basename $0)
+    if [[ $bin_name == "git-kommit" ]]; then
+        chars=$(echo ${CMD_OPTIONS//\:/} | fold -w 1)
+        opts=""
+        for c in ${chars[@]}; do
+          opts="${opts} -${c}"
+        done
+        echo '# add this to your bash-completion or bashrc'
+        echo '_git_kommit(){'
+        echo -e "\t__gitcomp \"${opts/ /}\""
+        echo '}'
+        echo '# add this to your bash-completion or bashrc'
+    else
+        echo "You need to change this files name to: git-kommit"
+    fi
+}
+
+CMD_OPTIONS=":ibecrsht:m:"
+if in_git_repo; then
+    while getopts $CMD_OPTIONS opt; do
+        case $opt in
+            b)
+                bash_completion >&2
+                exit 0
+                ;;
+            e)
+                edit_messages >&2
+                exit 0
+                ;;
+            m)
+                add_message "${OPTARG}" >&2
+                exit 0
+                ;;
+            t)
+                timestamp=$(date '+%FT%T%z') # ISO8601 timestamp
+                add_message "[$timestamp]: ${OPTARG}" >&2
+                exit 0
+                ;;
+            c)
+                is_hook_installed >&2
+                exit 0
+                ;;
+            i)
+                install_hook >&2
+                exit 0
+                ;;
+            r)
+                remove_hook >&2
+                exit 0
+                ;;
+            s)
+                show_current_messages >&2
+                exit 0
+                ;;
+            h)
+                usage >&2
+                exit 0
+                ;;
+            \?)
+                echo "Invalid option: -$OPTARG" >&2
+                exit 1
+                ;;
+            :)
+                echo "Option -$OPTARG requires an argument." >&2
+                usage >&2
+                exit 1
+                ;;
+        esac
+    done
+    if [[ $opt == \? ]]; then
+        echo "Invalid usage..." >&2
+        usage >&2
+        exit 1
+    fi
+fi
