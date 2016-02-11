@@ -12,3 +12,8 @@ Thumbs.db
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
+
+# SSH tmp config
+.ssh/hosts.config
+.ssh/setup.config
+.ssh/config
