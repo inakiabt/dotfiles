@@ -54,6 +54,7 @@ brew install autojump
 brew install q
 brew install docker
 brew install boot2docker
+brew install diff-so-fancy
 
 # Install native apps
 brew tap phinze/homebrew-cask
