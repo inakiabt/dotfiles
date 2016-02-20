@@ -1,4 +1,4 @@
-clean_docker() {
+function clean_docker() {
   # $ docker help ps
   # -a, --all=false       Show all containers (default shows just running)
   # --before=             Show only container created before Id or Name
@@ -35,4 +35,72 @@ clean_docker() {
       echo " DELETED"
     fi
   done
+}
+
+# runs docker exec
+function docker-exec {
+  docker exec -ti $1 /bin/bash
+}
+
+# runs docker exec in the latest container
+function docker-exec-last {
+  docker exec -ti $( docker ps -a -q -l) /bin/bash
+}
+
+function docker-get-ip {
+  # Usage: docker-get-ip (name or sha)
+  [ -n "$1" ] && docker inspect --format "{{ .NetworkSettings.IPAddress }}" $1
+}
+
+function docker-get-id {
+  # Usage: docker-get-id (friendly-name)
+  [ -n "$1" ] && docker inspect --format "{{ .ID }}" "$1"
+}
+
+function docker-get-image {
+  # Usage: docker-get-image (friendly-name)
+  [ -n "$1" ] && docker inspect --format "{{ .Image }}" "$1"
+}
+
+function docker-get-state {
+  # Usage: docker-get-state (friendly-name)
+  [ -n "$1" ] && docker inspect --format "{{ .State.Running }}" "$1"
+}
+
+function docker-memory {
+  for line in `docker ps | awk '{print $1}' | grep -v CONTAINER`; do docker ps | grep $line | awk '{printf $NF" "}' && echo $(( `cat /sys/fs/cgroup/memory/docker/$line*/memory.usage_in_bytes` / 1024 / 1024 ))MB ; done
+}
+# keeps the commmand history when running a container
+function basher() {
+    if [[ $1 = 'run' ]]
+    then
+        shift
+        docker run -e HIST_FILE=/root/.bash_history -v $HOME/.bash_history:/root/.bash_history "$@"
+    else
+        docker "$@"
+    fi
+}
+# backup files from a docker volume into /tmp/backup.tar.gz
+function docker-volume-backup-compressed() {
+  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie tar -czvf /backup/backup.tar.gz "${@:2}"
+}
+# restore files from /tmp/backup.tar.gz into a docker volume
+function docker-volume-restore-compressed() {
+  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie tar -xzvf /backup/backup.tar.gz "${@:2}"
+  echo "Double checking files..."
+  docker run --rm -v /tmp:/backup --volumes-from "$1" debian:jessie ls -lh "${@:2}"
+}
+# backup files from a docker volume into /tmp/backup.tar
+function docker-volume-backup() {
+  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox tar -cvf /backup/backup.tar "${@:2}"
+}
+# restore files from /tmp/backup.tar into a docker volume
+function docker-volume-restore() {
+  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox tar -xvf /backup/backup.tar "${@:2}"
+  echo "Double checking files..."
+  docker run --rm -v /tmp:/backup --volumes-from "$1" busybox ls -lh "${@:2}"
+}
+
+function docker-remove-log() {
+  docker-machine ssh default "sudo rm $(docker inspect --format='{{.LogPath}}' $1)"
 }

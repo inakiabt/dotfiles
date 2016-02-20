@@ -10,7 +10,7 @@ done;
 unset file;
 
 # Loads all my bash functions
-for f in ~/.functions.d/*.bash; do
+for f in ~/.{functions,aliases}.d/*.bash; do
   . $f;
 done
 unset f
@@ -84,3 +84,6 @@ fi
 [ -f ~/bin/bashmarks/bashmarks.sh ] && source ~/bin/bashmarks/bashmarks.sh
 
 source /opt/boxen/homebrew/opt/autoenv/activate.sh
+
+source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
+source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
