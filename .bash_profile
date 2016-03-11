@@ -49,8 +49,9 @@ fi;
 # Enable tab completion for `aws`
 complete -C aws_completer aws
 
-# Enable tab completion for `nodenv`
-if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+# Enable nvm
+export NVM_DIR=~/.nvm
+. $(brew --prefix nvm)/nvm.sh
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
@@ -71,8 +72,6 @@ which grunt > /dev/null && eval "$(grunt --completion=bash)"
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
 source ~/profile.d/*
-
-export PATH=/opt/boxen/nvm/v0.8.8/bin/:$PATH
 
 # If possible, add tab completion for many more commands
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
