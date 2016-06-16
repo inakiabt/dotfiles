@@ -35,7 +35,7 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # Link Homebrew casks in `/Applications` rather than `~/Applications`
-export HOMEBREW_CASK_OPTS="--appdir=/Applications";
+export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom";
 
 export DOCKER_HOST=tcp://localhost:2375
 
