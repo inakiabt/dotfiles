@@ -108,3 +108,7 @@ Suggestions/improvements
 * [Kevin Suttle](http://kevinsuttle.com/) and his [dotfiles repository](https://github.com/kevinSuttle/dotfiles) and [OSXDefaults project](https://github.com/kevinSuttle/OSXDefaults), which aims to provide better documentation for [`~/.osx`](https://mths.be/osx)
 * [Haralan Dobrev](http://hkdobrev.com/)
 * anyone who [contributed a patch](https://github.com/mathiasbynens/dotfiles/contributors) or [made a helpful suggestion](https://github.com/mathiasbynens/dotfiles/issues)
+
+## Mathias Bynens Repo Checkpoint
+
+* 2016-07-13: *cherry-pick* [fb0bd713f62d1665f4cabed1aa97f7763f18f0b3](https://github.com/inakiabt/dotfiles/commit/fb0bd713f62d1665f4cabed1aa97f7763f18f0b3)
