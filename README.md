@@ -81,6 +81,10 @@ When setting up a new Mac, you may want to install some common [Homebrew](http:/
 ./brew.sh
 ```
 
+### GPG Setup
+
+https://gist.github.com/bmhatfield/cc21ec0a3a2df963bffa3c1f884b676b
+
 ## Feedback
 
 Suggestions/improvements
