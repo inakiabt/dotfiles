@@ -98,3 +98,8 @@ if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
 else
     eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 fi
+
+# path to the DC/OS CLI binary
+if [[ "$PATH" != *"/Users/inakiabt/dcos/bin"* ]];
+  then export PATH=$PATH:/Users/inakiabt/dcos/bin;
+fi
