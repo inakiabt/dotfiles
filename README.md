@@ -109,6 +109,6 @@ Suggestions/improvements
 * [Haralan Dobrev](http://hkdobrev.com/)
 * anyone who [contributed a patch](https://github.com/mathiasbynens/dotfiles/contributors) or [made a helpful suggestion](https://github.com/mathiasbynens/dotfiles/issues)
 
-## Mathias Bynens Repo Checkpoint
+## Mathias Bynens Checkpoint
 
 * 2016-07-13: *cherry-pick* [fb0bd713f62d1665f4cabed1aa97f7763f18f0b3](https://github.com/inakiabt/dotfiles/commit/fb0bd713f62d1665f4cabed1aa97f7763f18f0b3)
