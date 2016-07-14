@@ -195,6 +195,7 @@ helper = /opt/boxen/bin/boxen-git-credential
 	email = inakiabt@gmail.com
 	name = Iñaki Abete
 	insteadOf = "gist:"
+	signingkey = D8268B75F511BD8A
 [filter "lfs"]
 	smudge = git-lfs smudge %f
 	required = true
