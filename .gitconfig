@@ -200,3 +200,6 @@ helper = /opt/boxen/bin/boxen-git-credential
 	smudge = git-lfs smudge %f
 	required = true
 	clean = git-lfs clean %f
+
+[gpg]
+    program = /opt/boxen/homebrew/bin/gpg
