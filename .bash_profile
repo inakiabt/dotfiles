@@ -103,3 +103,6 @@ fi
 if [[ "$PATH" != *"/Users/inakiabt/dcos/bin"* ]];
   then export PATH=$PATH:/Users/inakiabt/dcos/bin;
 fi
+
+# added by Miniconda3 4.1.11 installer
+export PATH="/Users/inakiabt/.miniconda3/bin:$PATH"
