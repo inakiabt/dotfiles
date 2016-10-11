@@ -53,8 +53,6 @@ brew install sshuttle
 brew install autojump
 #brew install tor
 brew install q
-brew install docker
-brew install boot2docker
 brew install diff-so-fancy
 
 # Install native apps
