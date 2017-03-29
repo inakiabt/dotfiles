@@ -202,4 +202,4 @@ helper = /opt/boxen/bin/boxen-git-credential
 	clean = git-lfs clean %f
 
 [gpg]
-    program = /opt/boxen/homebrew/bin/gpg
+    program = /opt/boxen/homebrew/bin/gpg2

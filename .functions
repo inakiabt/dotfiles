@@ -254,3 +254,15 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# usage: whoport <port>
+# it will show what process is using the <port>
+function whoport() {
+    who=`lsof -n -i4TCP:$1 | grep LISTEN`
+    proc=`echo $who | awk '{print $2}'`
+    if [ -z $proc ]; then
+        echo "No one"
+        return
+    fi
+    ps -p $proc -o 'command'
+}
