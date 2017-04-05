@@ -138,6 +138,7 @@
 
 	# Detect copies as well as renames
 	renames = copies
+	tool = diffmerge
 
 [diff "bin"]
 
@@ -153,6 +154,7 @@
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+	tool = diffmerge
 
 [push]
 
@@ -203,3 +205,8 @@ helper = /opt/boxen/bin/boxen-git-credential
 
 [gpg]
     program = /opt/boxen/homebrew/bin/gpg2
+[difftool "diffmerge"]
+	cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+[mergetool "diffmerge"]
+	trustExitCode = true
+	cmd = /usr/local/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
