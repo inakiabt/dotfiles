@@ -16,6 +16,12 @@ function calc() {
 	printf "\n";
 }
 
+# Take a remote screenshot and show it through the terminal (iTerm2 imgcat is required)
+#   Usage: screensshot user@remote-server
+function screensshot() {
+    ssh $1 "xwd -out /tmp/screenshot.xwd -root -display :0.0 1> /dev/null 2> /dev/null; xwdtopnm /tmp/screenshot.xwd 2> /dev/null | pnmtopng" | imgcat
+}
+
 growl() {
 	echo -e $'\e]9;'${1}'\007';
 	return;
