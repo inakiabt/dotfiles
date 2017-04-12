@@ -48,6 +48,7 @@ brew install zopfli
 brew install michaeldfallen/formula/git-radar
 
 brew tap homebrew/versions
+brew install subliminal
 brew install lua52
 brew install sshuttle
 brew install autojump
