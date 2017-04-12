@@ -8,7 +8,7 @@
 #      $ eval $(aws-assume-export)
 #
 
-// Credit to https://gist.github.com/ambakshi/ba0fe456bb6da24da7c2
+# Credit to https://gist.github.com/ambakshi/ba0fe456bb6da24da7c2
 function aws-assume-export() {
   set -e
   # Clear out existing AWS session environment, or the awscli call will fail
@@ -27,7 +27,7 @@ function aws-assume-export() {
                             --duration-seconds $DURATION \
                             --query '[Credentials.AccessKeyId,Credentials.SecretAccessKey,Credentials.SessionToken]' \
                             --output text`)
-                            
+
   echo 'export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}'
   echo "export AWS_ACCESS_KEY_ID='${KST[0]}'"
   echo "export AWS_ACCESS_KEY='${KST[0]}'"
