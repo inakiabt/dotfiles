@@ -22,7 +22,7 @@ function calc() {
 function sbl() {
   str=${@:2}
   episode=${str//[ ]+/ }
-  subliminal download -l $1 '${episode// /.}.mp4'
+  subliminal download -l $1 "${episode// /.}.mp4"
 }
 
 # Take a remote screenshot and show it through the terminal (iTerm2 imgcat is required)
