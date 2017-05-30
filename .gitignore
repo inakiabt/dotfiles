@@ -3,6 +3,9 @@
 
 # Folder view configuration files
 .DS_Store
+.DS_Store?
+Icon
+ehthumbs.db
 Desktop.ini
 
 # Thumbnail cache files
@@ -17,3 +20,11 @@ Thumbs.db
 .ssh/hosts.config
 .ssh/setup.config
 .ssh/config
+
+*.swp
+*.swo
+*.orig
+*~
+\#*\#
+/tags
+/.bundle/
