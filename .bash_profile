@@ -65,10 +65,6 @@ complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null || complete 
 # Autocomplete Grunt commands
 which grunt > /dev/null && eval "$(grunt --completion=bash)"
 
-[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
-
-source ~/profile.d/*
-
 # Enable nvm
 export NVM_DIR=~/.nvm
 . $(brew --prefix nvm)/nvm.sh
@@ -81,8 +77,6 @@ fi
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
 [ -f ~/bin/bashmarks/bashmarks.sh ] && source ~/bin/bashmarks/bashmarks.sh
-
-source /opt/boxen/homebrew/opt/autoenv/activate.sh
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
@@ -100,9 +94,9 @@ else
 fi
 
 # path to the DC/OS CLI binary
-if [[ "$PATH" != *"/Users/inakiabt/dcos/bin"* ]];
-  then export PATH=$PATH:/Users/inakiabt/dcos/bin;
+if [[ "$PATH" != *"$HOME/dcos/bin"* ]];
+  then export PATH=$PATH:$HOME/dcos/bin;
 fi
 
 # added by Miniconda3 4.1.11 installer
-export PATH="/Users/inakiabt/.miniconda3/bin:$PATH"
+export PATH="$HOME/.miniconda3/bin:$PATH"
