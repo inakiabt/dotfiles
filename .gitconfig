@@ -88,7 +88,7 @@
 [core]
 
 	# Use custom `.gitignore` and `.gitattributes`
-	excludesfile = /opt/boxen/config/git/gitignore
+	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
 	autocrlf = false
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -191,8 +191,8 @@
 [hub]
 protocol = https
 
-[credential]
-helper = /opt/boxen/bin/boxen-git-credential
+# [credential]
+# helper = /opt/boxen/bin/boxen-git-credential
 [user]
 	email = inakiabt@gmail.com
 	name = Iñaki Abete
@@ -204,7 +204,7 @@ helper = /opt/boxen/bin/boxen-git-credential
 	clean = git-lfs clean %f
 
 [gpg]
-    program = /opt/boxen/homebrew/bin/gpg2
+    program = /usr/local/bin/gpg2
 [difftool "diffmerge"]
 	cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
 [mergetool "diffmerge"]
