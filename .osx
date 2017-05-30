@@ -13,10 +13,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "Inaki MacBook Pro"
-sudo scutil --set HostName "Inaki MacBook Pro"
-sudo scutil --set LocalHostName "InakiMacBook-Pro"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "Inaki MacBook-Pro"
+sudo scutil --set ComputerName "InakiMBP"
+sudo scutil --set HostName "inakiabt.host"
+sudo scutil --set LocalHostName "inakiabt.local"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "InakiMBP"
 
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
