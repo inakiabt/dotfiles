@@ -18,6 +18,9 @@ sudo scutil --set HostName "inakiabt.host"
 sudo scutil --set LocalHostName "inakiabt.local"
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "InakiMBP"
 
+# Set date format to HH:mm
+defaults write com.apple.menuextra.clock "DateFormat" 'HH:mm'
+
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
 
