@@ -356,6 +356,7 @@ defaults write com.apple.dock mouse-over-hilite-stack -bool true
 defaults write com.apple.dock tilesize -int 42
 
 # Set magnification
+defaults write com.apple.dock magnification -bool true
 defaults write com.apple.dock largesize -int 58
 
 # Change minimize/maximize window effect
