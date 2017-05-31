@@ -6,84 +6,63 @@ brew update
 # Upgrade any already-installed formulae
 brew upgrade
 
+# Caskroom
+brew tap caskroom/cask
+
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
-# Install Bash 4
-brew install bash
 
-# Install wget with IRI support
-brew install wget --enable-iri
-
-# Install more recent versions of some OS X tools
-brew tap homebrew/dupes
-brew tap jingweno/ccat
-brew install homebrew/dupes/grep
-brew tap josegonzalez/homebrew-php
-brew install php55
-
-# These two formulae didn’t work well last time I tried them:
-#brew install homebrew/dupes/vim
-#brew install homebrew/dupes/screen
-
-# Install other useful binaries
-brew install ngrep
+brew install bash-completion
+brew install gettext
+brew install gnu-sed
 brew install ccat
-brew install ack
-#brew install exiv2
+brew install ngrep
+brew install aria2
+brew install brew-cask-completion
 brew install git
+brew install gnu-tar
+brew install pinentry-mac
+brew install autoenv
+brew install coreutils
 brew install git-flow
-#brew install imagemagick
-brew install lynx
+brew install gnupg
 brew install nvm
-brew install node
-brew install pigz
-brew install rename
-brew install rhino
-brew install tree
-brew install webkit2png
-brew install zopfli
-brew install michaeldfallen/formula/git-radar
-
-brew tap homebrew/versions
-brew install subliminal
-brew install lua52
-brew install sshuttle
-brew install autojump
-#brew install tor
-brew install q
+brew install awscli
+brew install curl
+brew install git-radar
+brew install mackup
+brew install bash
 brew install diff-so-fancy
-
-# Install native apps
-brew tap phinze/homebrew-cask
-brew install brew-cask
+brew install gpg-agent
+brew install wget --enable-iri
+brew install michaeldfallen/formula/git-radar
+brew install tree
+brew install subliminal
+brew install sshuttle
 
 function installcask() {
     brew cask install "${@}" 2> /dev/null
 }
 
+installcask atom
+installcask bartender
+installcask bettertouchtool
+installcask bitbar
+installcask caffeine
 installcask diffmerge
-installcask google-chrome
-installcask imagealpha
+installcask jumpcut
+installcask spotify
+installcask slack
+installcask whatsapp
+installcask telegram
 installcask imageoptim
 installcask iterm2
-installcask sublime-text
-installcask the-unarchiver
-installcask transmission
-installcask virtualbox
 installcask vlc
 
 # Quick Look
-installcask qlcolorcode
-installcask qlstephen
-installcask qlmarkdown
-installcask quicklook-json
-installcask qlprettypatch
-installcask quicklook-csv
-installcask betterzipql
-installcask webp-quicklook
 installcask suspicious-package
 qlmanage -r
 
