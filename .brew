@@ -61,6 +61,7 @@ installcask telegram
 installcask imageoptim
 installcask iterm2
 installcask vlc
+installcask github-desktop
 
 # Quick Look
 installcask suspicious-package
