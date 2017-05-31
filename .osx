@@ -18,6 +18,9 @@ sudo scutil --set HostName "inakiabt.host"
 sudo scutil --set LocalHostName "inakiabt.local"
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "InakiMBP"
 
+# Set date format to HH:mm
+defaults write com.apple.menuextra.clock "DateFormat" 'HH:mm'
+
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
 
@@ -186,7 +189,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 1
-sdefaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Set language and text formats
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
@@ -352,8 +355,12 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
-# Set the icon size of Dock items to 36 pixels
-defaults write com.apple.dock tilesize -int 36
+# Set the icon size of Dock items to 42 pixels
+defaults write com.apple.dock tilesize -int 42
+
+# Set magnification
+defaults write com.apple.dock magnification -bool true
+defaults write com.apple.dock largesize -int 58
 
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
