@@ -8,40 +8,52 @@ brew upgrade
 
 # Caskroom
 brew tap caskroom/cask
+brew install homebrew/dupes/grep
+brew install homebrew/dupes/openssh
+brew install homebrew/dupes/screen
 
+# Install some other useful utilities like `sponge`.
+brew install moreutils
 # Install GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 echo "Don’t forget to add $(brew --prefix coreutils)/libexec/gnubin to \$PATH."
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
 
-brew install bash-completion
-brew install gettext
-brew install gnu-sed
-brew install ccat
-brew install ngrep
 brew install aria2
-brew install brew-cask-completion
-brew install git
-brew install gnu-tar
-brew install pinentry-mac
 brew install autoenv
-brew install coreutils
-brew install git-flow
-brew install gnupg
-brew install nvm
 brew install awscli
-brew install curl
-brew install git-radar
-brew install mackup
 brew install bash
+brew install bash-completion2
+brew install brew-cask-completion
+brew install ccat
+brew install coreutils
+brew install curl
+brew install dark-mode
 brew install diff-so-fancy
+brew install gettext
+brew install git
+brew install git-flow
+brew install git-lfs
+brew install gnu-sed --with-default-names
+brew install gnu-tar
+brew install gnupg
 brew install gpg-agent
-brew install wget --enable-iri
+brew install mackup
 brew install michaeldfallen/formula/git-radar
-brew install tree
-brew install subliminal
+brew install ngrep
+brew install nvm
+brew install pinentry-mac
 brew install sshuttle
+brew install subliminal
+brew install tree
+brew install wget --enable-iri
+
+# Switch to using brew-installed bash as default shell
+if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
+  echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
+  chsh -s /usr/local/bin/bash;
+fi;
 
 function installcask() {
     brew cask install "${@}" 2> /dev/null
