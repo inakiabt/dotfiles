@@ -40,6 +40,7 @@ brew install gnu-tar
 brew install gnupg
 brew install gpg-agent
 brew install mackup
+brew install mas
 brew install michaeldfallen/formula/git-radar
 brew install ngrep
 brew install nvm
@@ -47,6 +48,7 @@ brew install pinentry-mac
 brew install sshuttle
 brew install subliminal
 brew install tree
+brew install watchman
 brew install wget --enable-iri
 
 # Switch to using brew-installed bash as default shell
