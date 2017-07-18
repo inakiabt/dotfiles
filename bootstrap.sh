@@ -4,9 +4,9 @@ cd "$(dirname "${BASH_SOURCE}")";
 
 git pull origin master;
 
-source .functions.d/ssh-config.bash
-ssh_config_hosts > .ssh/hosts.config
-ssh_config_generate > .ssh/config
+# source .functions.d/ssh-config.bash
+# ssh_config_hosts > .ssh/hosts.config
+# ssh_config_generate > .ssh/config
 
 function doIt() {
 	rsync --exclude ".git/" --exclude ".gitmodules" --exclude ".DS_Store" --exclude "bootstrap.sh" \
