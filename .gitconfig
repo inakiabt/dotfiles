@@ -63,22 +63,6 @@
   # List contributors with number of commits
   contributors = shortlog --summary --numbered
 
-  # Merge GitHub pull request on top of the current branch or,
-  # if a branch name is specified, on top of the specified branch
-  mpr = "!f() { \
-    declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
-    declare branch=\"${2:-$currentBranch}\"; \
-    if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
-      git fetch origin refs/pull/$1/head:pr/$1 && \
-      git checkout -B $branch && \
-      git rebase $branch pr/$1 && \
-      git checkout -B $branch && \
-      git merge pr/$1 && \
-      git branch -D pr/$1 && \
-      git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
-    fi \
-  }; f"
-
 [apply]
   # Detect whitespace errors when applying a patch
   whitespace = fix
@@ -104,7 +88,7 @@
 [color]
   # Use colors in Git commands that are capable of colored output when
   # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
-  ui = auto
+  ui = true
 
 [color "branch"]
   current = yellow reverse
@@ -112,10 +96,18 @@
   remote = green
 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold # line info
-  old = red # deletions
-  new = green # additions
+  meta = 227
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  commit = 227 bold
+  whitespace = red reverse
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 
 [color "status"]
   added = yellow
@@ -151,7 +143,6 @@
 # URL shorthands
 
 [url "git@github.com:"]
-
   insteadOf = "gh:"
   pushInsteadOf = "github:"
   pushInsteadOf = "git://github.com/"
@@ -163,8 +154,6 @@
   insteadOf = "gst:"
   pushInsteadOf = "gist:"
   pushInsteadOf = "git://gist.github.com/"
-
-[url "git://gist.github.com/"]
 
 [push]
   default = matching
@@ -178,7 +167,7 @@
   clean = git-lfs clean %f
 
 [gpg]
-    program = /usr/local/bin/gpg2
+  program = /usr/local/bin/gpg2
 
 [difftool "diffmerge"]
   cmd = /usr/local/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
