@@ -63,6 +63,9 @@
   # List contributors with number of commits
   contributors = shortlog --summary --numbered
 
+  # Remove untracked files
+  clean-untracked = clean -f -d
+
 [apply]
   # Detect whitespace errors when applying a patch
   whitespace = fix
