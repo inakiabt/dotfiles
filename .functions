@@ -147,6 +147,8 @@ function gz() {
 }
 
 # Syntax-highlight JSON strings or files
+# Requirements:
+#  - pip install pygments
 # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
 function json() {
 	if [ -t 0 ]; then # argument
