@@ -45,3 +45,6 @@ export GREP_OPTIONS='--color=auto';
 # Go lang env variables
 export GOPATH=$HOME/src/golang
 export PATH=$PATH:$GOPATH/bin
+
+# use gnu-sed
+PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH"
