@@ -165,9 +165,10 @@
   protocol = https
 
 [filter "lfs"]
-  smudge = git-lfs smudge %f
+	smudge = git-lfs smudge -- %f
   required = true
-  clean = git-lfs clean %f
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process
 
 [gpg]
   program = /usr/local/bin/gpg2
