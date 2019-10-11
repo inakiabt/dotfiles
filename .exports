@@ -48,3 +48,6 @@ export PATH=$PATH:$GOPATH/bin
 
 # use gnu-sed
 PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH"
+
+# hide default zsh
+export BASH_SILENCE_DEPRECATION_WARNING=1
