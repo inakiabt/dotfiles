@@ -66,8 +66,9 @@ complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null || complete 
 which grunt > /dev/null && eval "$(grunt --completion=bash)"
 
 # Enable nvm
-export NVM_DIR=~/.nvm
-. $(brew --prefix nvm)/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+  [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
+  [ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && . "$(brew --prefix nvm)/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # If possible, add tab completion for many more commands
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
