@@ -37,6 +37,9 @@
   # Credit an author on the latest commit
   credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
+  # Undo last commit without removing files
+  undo = "!r() { git reset --soft HEAD~1; }; r"
+
   # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
   glog = log --all --pretty='format:%d %Cgreen%h%Creset %an - %s' --graph

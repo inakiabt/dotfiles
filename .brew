@@ -84,3 +84,5 @@ qlmanage -r
 
 # Remove outdated versions from the cellar
 brew cleanup
+
+# pip install meta-package-manager # for mpm
