@@ -41,9 +41,9 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
 
-# Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-	complete -o default -o nospace -F _git g;
+# Add tab completion for git `g` alias
+if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+	complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g || complete -o default -o nospace -F __git_wrap__git_main g
 fi;
 
 # Enable tab completion for `aws`
@@ -58,9 +58,6 @@ complete -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
-
-# Add tab completion for git `g` alias
-complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null || complete -o default -o nospace -F _git g
 
 # Autocomplete Grunt commands
 which grunt > /dev/null && eval "$(grunt --completion=bash)"
