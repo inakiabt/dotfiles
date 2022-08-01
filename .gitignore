@@ -1,0 +1,29 @@
+# Compiled Python files
+*.pyc
+
+# Folder view configuration files
+.DS_Store
+.DS_Store?
+Icon
+ehthumbs.db
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+*.swp
+*.swo
+*.orig
+*~
+\#*\#
+/tags
+/.bundle/
+
+.idea
+.initial-setup-completed
+mackup

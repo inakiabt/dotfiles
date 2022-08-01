@@ -1,0 +1,14 @@
+[commit]
+  # https://help.github.com/articles/signing-commits-using-gpg/
+  gpgsign = $SIGN_COMMITS
+
+[user]
+  email = $EMAIL
+  insteadOf = "gist:"
+  signingkey = $SIGNING_KEY
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  allowedSignersFile = ~/.config/git/$ALLOWED_SIGNERS_FOLDER/allowed_signers

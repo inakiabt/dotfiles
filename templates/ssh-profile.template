@@ -1,0 +1,6 @@
+# can be used like: git clone $GIT:user/repo.git
+Host $HOST
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/$PROFILE.pub
+    IdentitiesOnly yes

@@ -1,0 +1,6 @@
+[user]
+  email = inakiabt@gmail.com
+  name = Iñaki Abete
+
+[include]
+  path = ~/.config/git/profiles
