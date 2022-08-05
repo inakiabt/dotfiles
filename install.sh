@@ -22,6 +22,7 @@ if ! brew list git > /dev/null 2>&1; then
   brew install git
 fi
 
+echo "Git version"
 git --version
 # Add brew sbin to the `$PATH`
 export PATH="/usr/local/sbin:$PATH"
