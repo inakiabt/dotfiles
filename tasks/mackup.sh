@@ -4,11 +4,10 @@ source "$DOTFILES/lib/task.sh"
 
 if [ ! -d "$DOTFILES/mackup" ]; then
   step "Checkout private mackup repository..."
-  git clone personal:inakiabt/mackup.git "$DOTFILES/mackup"
+  git clone "personal:$DOTFILES_MACKUP_REPO.git" "$DOTFILES/mackup"
 else
   step "Updating private mackup repository..."
-  cd "$DOTFILES/mackup" || exit
-  git pull
+  mackup_git pull
 fi
 
 symlink "$MACKUP/.mackup.cfg" "$HOME/.mackup.cfg"

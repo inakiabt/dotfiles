@@ -2,13 +2,8 @@
 
 source "$DOTFILES/lib/task.sh"
 
-step "Creating ~/.config"
-mkdir -p ~/.config
-step "Creating ~/.config/ssh"
-mkdir -p ~/.config/ssh/profiles
-step "Creating ~/.config/ssh/profiles"
-mkdir -p ~/.ssh
-step "Creating ~/tmp"
-mkdir -p ~/tmp
-step "Creating ~/src"
-mkdir -p ~/src
+mkdir_step "$HOME/.config"
+mkdir_step "$HOME/.config/ssh/profiles"
+mkdir_step "$HOME/.ssh"
+mkdir_step "$HOME/tmp" "Creating temp folder $HOME/tmp"
+mkdir_step "$DOTFILES_SRC_FOLDER" "Creating source code workspace $DOTFILES_SRC_FOLDER"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$HOME/.dotfiles/lib/exports.sh"
+[ ! "$IS_DOTFILES_RUN" == "true" ] && echo "Please run this script from the dotfiles repo root." && exit 1
 
 function create_ssh_profile() {
   local name="$1"
@@ -76,5 +76,3 @@ function create_profile() {
 
 mkdir -p "$CONFIG_FOLDER/ssh/profiles.d" || true
 mkdir -p "$CONFIG_FOLDER/git/profiles.d" || true
-
-[ -f "$CONFIG_FOLDER/git/profiles" ] && mv "$CONFIG_FOLDER/git/profiles" "$CONFIG_FOLDER/git/profiles.bkp" || true

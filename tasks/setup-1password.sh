@@ -4,16 +4,28 @@ source "$DOTFILES/lib/task.sh"
 
 step "Ensure SSH_AUTH_SOCK is set for all apps"
 # shellcheck disable=SC2143
-[ -z "$(launchctl list | grep com.1password.SSH_AUTH_SOCK)" ] && launchctl load -w "$HOME/Library/LaunchAgents/com.1password.SSH_AUTH_SOCK.plist"
+if [ ! -f "$HOME/Library/LaunchAgents/com.1password.SSH_AUTH_SOCK.plist" ] || [ -z "$(launchctl list | grep com.1password.SSH_AUTH_SOCK)" ]; then
+  mkdir_step "$HOME/Library/LaunchAgents"
+  cp -f "$DOTFILES/files/com.1password.SSH_AUTH_SOCK.plist" "$HOME/Library/LaunchAgents/"
+  launchctl load -w "$HOME/Library/LaunchAgents/com.1password.SSH_AUTH_SOCK.plist" || true
+fi
 
 ONEPASSWORD_ACCOUNT=$(jq -r '."1password".account' "$DOTFILES/.initial-setup-completed")
 ONEPASSWORD_EMAIL=$(jq -r '."1password".email' "$DOTFILES/.initial-setup-completed")
 
 step "Ensure your 1Password account is set: $ONEPASSWORD_ACCOUNT ($ONEPASSWORD_EMAIL)"
 if ! op account list | grep -q "$ONEPASSWORD_ACCOUNT"; then
-  substep "We are going to open 1Password and set your account"
+  substep "We are going to open 1Password and you need to setup your account"
   echo ""
-  echo "   👉 Once there, don't forget to turn on biometric unlock on 1Password:"
+  substep "Once there you need you need to turn on the 1Password SSH Agent"
+  echo "    1- Go to Preferences > Developer."
+  echo "    2- Select the checkbox to \"Use the SSH agent\"."
+  echo "    3- Optional: Select the checkbox to \"Display key names when authorizing connections\"."
+  echo ""
+  echo "    # Note: https://developer.1password.com/docs/ssh/get-started#step-3-turn-on-the-1password-ssh-agent"
+
+  echo ""
+  substep "Don't forget to turn on biometric unlock on 1Password:"
   echo "      1- Click the account or collection at the top of the sidebar and choose Preferences > Security."
   echo "      2- Select Touch ID."
   echo "      3- Click Developer in the sidebar."

@@ -1,3 +1,5 @@
+[ ! "$IS_DOTFILES_RUN" == "true" ] && echo "Please run this script from the dotfiles repo root." && exit 1
+
 ARGS_PARSED=0
 DEBUG_ENABLED=0
 ACCEPT_ENABLED=0

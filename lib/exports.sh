@@ -1,5 +1,5 @@
+export IS_DOTFILES_RUN=true
 export CONFIG_FOLDER="$HOME/.config"
-export DOTFILES="$HOME/.dotfiles"
 export MACKUP="$DOTFILES/mackup"
 export PATH="$PATH:$HOME/.local/bin"
 

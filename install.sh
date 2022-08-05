@@ -2,7 +2,7 @@
 
 set -Eeuo pipefail
 
-SOURCE="git@github.com:inakiabt/dotfiles.git"
+SOURCE="https://github.com/inakiabt/dotfiles.git"
 TARGET="$HOME/.dotfiles"
 
 echo "Welcome to the dotfiles installer!"
@@ -29,9 +29,17 @@ export PATH="/usr/local/sbin:$PATH"
 # Add brew bin to the `$PATH`
 export PATH="/usr/local/bin:$PATH"
 
-echo "Installing dotfiles..."
-mkdir -p "$TARGET"
-git clone $SOURCE "$TARGET"
+if [ ! -d "$TARGET" ]; then
+  echo "Installing dotfiles..."
+  mkdir -p "$TARGET"
+  git clone $SOURCE "$TARGET"
+  cd "$TARGET"
+  git config pull.rebase true
+else
+  echo "Updating dotfiles..."
+  cd "$TARGET"
+  git pull
+fi
 
 read -rp "Are you ready to run the setup? (y/n) " -n 1;
 echo "";

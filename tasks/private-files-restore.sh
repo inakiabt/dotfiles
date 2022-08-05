@@ -28,8 +28,11 @@ function process_private_file() {
     if [ -f "$DESTINATION_FILE_PATH" ]; then
       [ "$ACCEPT_ENABLED" -eq "0" ] && read -rp "File already exist: \"$DESTINATION_FILE_PATH\". Are you sure you want to overwrite it? (y/n) " -n 1 && echo "" || REPLY="y";
       if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm -f "$DESTINATION_FILE_PATH"
-        restore_file "$id" "$DESTINATION_FILE_PATH" || true
+        if mv "$DESTINATION_FILE_PATH" "$DESTINATION_FILE_PATH.bak" && restore_file "$id" "$DESTINATION_FILE_PATH"; then
+          rm -f "$DESTINATION_FILE_PATH.bak"
+        else
+          mv "$DESTINATION_FILE_PATH.bak" "$DESTINATION_FILE_PATH"
+        fi
       else
         substep "Skipping..."
       fi

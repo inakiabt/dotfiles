@@ -1,6 +1,8 @@
 #!/bin/bash
 set -Eeuo pipefail
 
+[ ! "$IS_DOTFILES_RUN" == "true" ] && echo "Please run this script from the dotfiles repo root." && exit 1
+
 source "$DOTFILES/lib/utils.sh"
 
 sudo -v

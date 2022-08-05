@@ -4,7 +4,7 @@ source "$DOTFILES/lib/task.sh"
 
 # Check if homebrew is already installed. See: https://unhexium.net/zsh/how-to-check-variables-in-zsh/
 # This also install xcode command line tools.
-step "Checking if homebrew is installed"
+step "Ensure homebrew is installed"
 if test ! "$(which brew)"; then
   substep "Installing homebrew..."
   # Install Homebrew without prompting for user confirmation.

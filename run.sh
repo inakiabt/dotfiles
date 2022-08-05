@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-source "$HOME/.dotfiles/lib/exports.sh"
+
+CURRENT_DOTFILES=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+source "$CURRENT_DOTFILES/config.sh"
+if [ "$CURRENT_DOTFILES" != "$DOTFILES" ]; then
+  echo "Error: The current dotfiles directory is not the same as the one in the config file."
+  echo "Current: $CURRENT_DOTFILES"
+  echo "Config: $DOTFILES"
+  exit 1
+fi
+
+source "$DOTFILES/lib/exports.sh"
 source "$DOTFILES/lib/utils.sh"
 source "$DOTFILES/lib/args.sh"
+
 TASKS=$*
 echo "You are about to run the following tasks: $TASKS"
 

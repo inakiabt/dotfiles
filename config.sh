@@ -1,0 +1,5 @@
+export DOTFILES="$HOME/.dotfiles"
+export DOTFILES_REPO="inakiabt/dotfiles"
+export DOTFILES_MACKUP_REPO="inakiabt/mackup"
+export DOTFILES_SRC_FOLDER="$HOME/src"
+export DOTFILES_SRC_PERSONAL_FOLDER="$HOME/src/personal"
