@@ -8,7 +8,9 @@ if [ ! -d "$DOTFILES/mackup" ]; then
   git clone "personal:$DOTFILES_MACKUP_REPO.git" "$DOTFILES/mackup"
 else
   step "Updating private mackup repository..."
+  mackup_git stash
   mackup_git pull
+  mackup_git stash pop
 fi
 
 symlink "$MACKUP/.mackup.cfg" "$HOME/.mackup.cfg"

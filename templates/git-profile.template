@@ -8,7 +8,7 @@
   signingkey = $SIGNING_KEY
 
 [gpg]
-  format = ssh
+  format = $GPG_FORMAT
 
 [gpg "ssh"]
-  allowedSignersFile = ~/.config/git/$ALLOWED_SIGNERS_FOLDER/allowed_signers
+  allowedSignersFile = $CONFIG_FOLDER/git/$ALLOWED_SIGNERS_FOLDER/allowed_signers
