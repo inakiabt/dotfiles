@@ -14,11 +14,11 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 if test ! "$(which brew)"; then
-  echo "Setup homebrew"
+  echo "Setting up homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 if ! brew list git > /dev/null 2>&1; then
-  echo "Install git"
+  echo "Installing git..."
   brew install git
 fi
 
@@ -49,6 +49,5 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   sh setup.sh
 else
   echo "Once you are ready, run:"
-  echo "cd $TARGET"
-  echo "sh setup.sh"
+  echo "sh $TARGET/setup.sh"
 fi

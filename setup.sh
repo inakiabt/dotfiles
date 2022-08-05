@@ -27,6 +27,7 @@ setup-1password
 keys
 private-files-restore
 macos
+nvm
 xbar
 mackup
 brew

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source "$DOTFILES/lib/task.sh"
+source "$DOTFILES/lib/git.sh"
 
 if [ ! -d "$DOTFILES/mackup" ]; then
   step "Checkout private mackup repository..."
@@ -20,7 +21,7 @@ brew install mackup
 step "Mackup restore (dry run):"
 mackup -n restore
 echo ""
-read -rp "Are you sure you want to proceed? (y/n) " -n 1;
+[ "$ACCEPT_ENABLED" -eq "0" ] && read -rp "Are you sure you want to proceed? (y/n) " -n 1 || REPLY="y";
 echo "";
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   mackup restore
