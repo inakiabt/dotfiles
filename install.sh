@@ -19,6 +19,9 @@ if test ! "$(which brew)"; then
   echo "Setting up homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+eval "$($(which brew) shellenv)"
+
 if ! brew list git > /dev/null 2>&1; then
   echo "Installing git..."
   brew install git
@@ -35,11 +38,6 @@ fi
 
 echo "Git version"
 git --version
-# Add brew sbin to the `$PATH`
-export PATH="/usr/local/sbin:$PATH"
-
-# Add brew bin to the `$PATH`
-export PATH="/usr/local/bin:$PATH"
 
 if [ ! -d "$TARGET" ]; then
   echo "Installing dotfiles..."
