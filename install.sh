@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+# PIPETHIS_AUTHOR inakiabt
+
 set -Eeuo pipefail
 
-SOURCE="https://github.com/inakiabt/dotfiles.git"
+SOURCE="keybase://private/inakiabt/dotfiles"
 TARGET="$HOME/.dotfiles"
 
 echo "Welcome to the dotfiles installer!"
@@ -20,6 +22,15 @@ fi
 if ! brew list git > /dev/null 2>&1; then
   echo "Installing git..."
   brew install git
+fi
+if ! brew list keybase > /dev/null 2>&1; then
+  echo "Installing keybase..."
+  brew install --cask keybase
+fi
+
+if ! keybase whoami; then
+  echo "Login to keybase"
+  keybase login
 fi
 
 echo "Git version"
